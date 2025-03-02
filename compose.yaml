@@ -11,6 +11,8 @@ services:
       timeout: 10s
       retries: 5
       start_period: 10s
+    ports:
+      - 27017:27017
 
   backend-test:
     build:
@@ -56,7 +58,65 @@ services:
       context: frontend
       dockerfile: ../Dockerfile.frontend
     ports:
-      - 3000:3000
+      - 8080:8080
     depends_on:
       backend:
         condition: service_healthy
+      auth-mf:
+        condition: service_healthy
+      cards-mf:
+        condition: service_healthy
+      users-mf:
+        condition: service_healthy
+      shared-context-mf:
+        condition: service_healthy
+  
+  auth-mf:
+    build:
+      context: frontend/microfrontend/auth-mf
+      dockerfile: ../Dockerfile.auth-mf
+    healthcheck:
+      interval: 10s
+      timeout: 2s 
+      start_period: 15s 
+      retries: 5 
+      test: node healthcheck.js
+
+  cards-mf:
+    build:
+      context: frontend/microfrontend/cards-mf
+      dockerfile: ../Dockerfile.cards-mf
+    depends_on:
+      shared-context-mf:
+        condition: service_healthy
+    healthcheck:
+      interval: 10s
+      timeout: 2s 
+      start_period: 15s 
+      retries: 5 
+      test: node healthcheck.js
+
+  users-mf:
+    build:
+      context: frontend/microfrontend/users-mf
+      dockerfile: ../Dockerfile.users-mf
+    depends_on:
+      shared-context-mf:
+        condition: service_healthy
+    healthcheck:
+      interval: 10s
+      timeout: 2s 
+      start_period: 15s 
+      retries: 5 
+      test: node healthcheck.js
+
+  shared-context-mf:
+    build:
+      context: frontend/microfrontend/shared-context-mf
+      dockerfile: ../Dockerfile.shared-context-mf
+    healthcheck:
+      interval: 10s
+      timeout: 2s 
+      start_period: 15s 
+      retries: 5 
+      test: node healthcheck.js

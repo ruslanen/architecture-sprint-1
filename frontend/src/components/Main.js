@@ -1,6 +1,14 @@
 import React from 'react';
-import Card from './Card';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+
+const Card = lazy(() => import('cards/Card').catch(() => {
+  return { default: () => <div className='error'>Component is not available!</div> };
+})
+);
+
+const CurrentUserContext = lazy(() => import('shared_context/CurrentUserContext').catch(() => {
+  return { default: () => <div className='error'>Component is not available!</div> };
+})
+);
 
 function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = React.useContext(CurrentUserContext);

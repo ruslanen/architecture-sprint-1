@@ -1,20 +1,56 @@
-import React from "react";
+import { React,lazy } from "react";
 import { Route, useHistory, Switch } from "react-router-dom";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import PopupWithForm from "./PopupWithForm";
-import ImagePopup from "./ImagePopup";
 import api from "../utils/api";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
-import Register from "./Register";
-import Login from "./Login";
 import InfoTooltip from "./InfoTooltip";
-import ProtectedRoute from "./ProtectedRoute";
 import * as auth from "../utils/auth.js";
+
+const CurrentUserContext = lazy(() => import('shared_context_mf/CurrentUserContext').catch(() => {
+  return { default: () => <div className='error'>Component is not available!</div> };
+})
+);
+
+const PopupWithForm = lazy(() => import('shared_context_mf/PopupWithForm').catch(() => {
+  return { default: () => <div className='error'>Component is not available!</div> };
+})
+);
+
+const AddPlacePopup = lazy(() => import('cards_mf/AddPlacePopup').catch(() => {
+  return { default: () => <div className='error'>Component is not available!</div> };
+})
+);
+
+const ImagePopup = lazy(() => import('cards_mf/ImagePopup').catch(() => {
+  return { default: () => <div className='error'>Component is not available!</div> };
+})
+);
+
+const EditAvatarPopup = lazy(() => import('users_mf/EditAvatarPopup').catch(() => {
+  return { default: () => <div className='error'>Component is not available!</div> };
+})
+);
+
+const EditProfilePopup = lazy(() => import('users_mf/EditProfilePopup').catch(() => {
+  return { default: () => <div className='error'>Component is not available!</div> };
+})
+);
+
+const Login = lazy(() => import('auth_mf/Login').catch(() => {
+  return { default: () => <div className='error'>Component is not available!</div> };
+})
+);
+
+const Register = lazy(() => import('auth_mf/Register').catch(() => {
+  return { default: () => <div className='error'>Component is not available!</div> };
+})
+);
+
+const ProtectedRoute = lazy(() => import('auth_mf/ProtectedRoute').catch(() => {
+  return { default: () => <div className='error'>Component is not available!</div> };
+})
+);
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =

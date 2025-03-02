@@ -1,5 +1,9 @@
-import React from 'react';
-import PopupWithForm from './PopupWithForm';
+import { React,lazy }  from 'react';
+
+const PopupWithForm = lazy(() => import('shared_context_mf/PopupWithForm').catch(() => {
+  return { default: () => <div className='error'>Component is not available!</div> };
+})
+);
 
 function EditAvatarPopup({ isOpen, onUpdateAvatar, onClose }) {
   const inputRef = React.useRef();
