@@ -119,3 +119,11 @@ component "App.js" {
 Для создания микрофронтендов использовалась команда `npx create-mf-app`, которая добавила все необходимые зависимости для реализации подхода Module Federation.
 
 Единственное, что стоит отметить - пакет для реализации подхода из коробки установился rspack, а не webpack.
+
+# Задание 2
+
+Доступ на комментирование:
+
+https://drive.google.com/file/d/1B1TsLEVjzEdkdhZEtoG0JHbflnTQHnPt/view?usp=sharing
+
+Также текст из диаграммы есть в: [файлике](task2-notes.md)
