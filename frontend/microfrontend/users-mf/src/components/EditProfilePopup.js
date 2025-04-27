@@ -1,6 +1,14 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+
+const PopupWithForm = lazy(() => import('shared_context_mf/PopupWithForm').catch(() => {
+  return { default: () => <div className='error'>Component is not available!</div> };
+})
+);
+
+const CurrentUserContext = lazy(() => import('shared_context_mf/CurrentUserContext').catch(() => {
+  return { default: () => <div className='error'>Component is not available!</div> };
+})
+);
 
 function EditProfilePopup({ isOpen, onUpdateUser, onClose }) {
   const [name, setName] = React.useState('');
